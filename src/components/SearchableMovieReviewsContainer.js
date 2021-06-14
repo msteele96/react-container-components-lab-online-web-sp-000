@@ -3,8 +3,7 @@ import 'isomorphic-fetch';
 import MovieReviews from './MovieReviews'
 
 const NYT_API_KEY = 'RomRYEqFO1tWeCOvP0CaXKi7VwpllzQc';
-const URL = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${"horror"}`
-            + `api-key=${NYT_API_KEY}`;
+const URL = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=`
 
 // Code SearchableMovieReviewsContainer Here
 
@@ -25,7 +24,7 @@ export default class SearchableMovieReviewsContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        fetch(URL)
+        fetch(URL+this.state.searchTerm+`&api-key=${NYT_API_KEY}`)
         .then(resp => resp.json())
         .then(json => this.setState({
             reviews: json.results
