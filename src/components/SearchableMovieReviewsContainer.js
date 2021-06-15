@@ -27,12 +27,12 @@ export default class SearchableMovieReviewsContainer extends Component {
         fetch(URL+this.state.searchTerm+`&api-key=${NYT_API_KEY}`)
         .then(resp => resp.json())
         .then(json => this.setState({
-            reviews: json.results
+            reviews: [...json.results]
         }))
     }
 
     render() {
-        return <div><MovieReviews className="searchable-movie-reviews" />
+        return <div className="searchable-movie-reviews"><MovieReviews reviews={this.state.reviews}/>
             <form onSubmit={this.handleSubmit}>
                 <input type="text" onChange={this.handleChange} name="searchTerm"></input>
                 <input type="submit"></input>
